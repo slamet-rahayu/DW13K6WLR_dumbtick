@@ -53,12 +53,12 @@ class Content extends Component {
         tomorrow.setDate(tomorrow.getDate() + 1)
         return(date.toISOString().substring(0,10) == tomorrow.toISOString().substring(0,10))
         })
-        const datas = upcoming.filter((data)=>{return data.title.toLowerCase().indexOf(this.props.filter.toLowerCase()) !== -1})
+        const datas = event.filter((data)=>{return data.title.toLowerCase().indexOf(this.props.filter.toLowerCase()) !== -1})
         const userid = this.state.user.id
         return(
         <text>
         <div className="album">
-        <Row>{event.map((s,k)=>{
+        <Row>{datas.map((s,k)=>{
             return(
                 <Col sm={4} className="mb-4">
                 <Card>
