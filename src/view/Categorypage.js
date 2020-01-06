@@ -35,7 +35,7 @@ class Categorydetail extends Component{
     .then(res=>{
       this.setState({data: res.data, datacontent: res.data.events})
     })
-    this.props.getCatPage(id)
+    // this.props.getCatPage(id)
   }
   render(){
     // const {categorypg} = this.props.categorypg
