@@ -4,8 +4,6 @@ import { Modal } from 'react-bootstrap';
 import { ButtonToolbar } from 'react-bootstrap';
 import '../App.css';
 import '../App';
-import {Route, BrowserRouter, Redirect} from 'react-router-dom';
-import Apps from '../App';
 import axios from 'axios'
 
 function MyVerticallyCenteredModal(props) {
@@ -28,7 +26,7 @@ function MyVerticallyCenteredModal(props) {
         {/* <Modal.Title id="contained-modal-title-vcenter">
           <h4>hello</h4>
         </Modal.Title> */}
-        <h3 align="center"><b></b></h3>
+        <h3 align="center"><b>Login</b></h3>
         
         <p style={{fontSize:"15px",color:"grey",textAlign:"center"}}>
         </p><br></br><br></br>
@@ -50,7 +48,7 @@ function App() {
   return (
     <ButtonToolbar>
       <Button variant="outline-light btn-sm" onClick={() => setModalShow(true)}>
-        Sign in
+        Login
       </Button>
 
       <MyVerticallyCenteredModal

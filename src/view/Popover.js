@@ -2,7 +2,7 @@ import { getUser } from '../_actions/useraction'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux"
 import React, { Component } from 'react';
-import {Overlay, Button, ButtonToolbar, Popover} from 'react-bootstrap';
+import { Overlay, ButtonToolbar, Popover} from 'react-bootstrap';
 import axios from 'axios'
 
 const jwt = require('jsonwebtoken')
@@ -106,7 +106,6 @@ class Content extends Component {
      axios.get('http://localhost:5000/api/v1/user/'+token.userId)
     .then(res=>{
       this.setState({user: res.data})
-      console.log(res)
     })
     }
   }
@@ -121,16 +120,18 @@ class Content extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-      getUser: bindActionCreators(getUser, dispatch)
-  }
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//       getUser: bindActionCreators(getUser, dispatch)
+//   }
+// }
 
-const mapstateToProps = state => {
-  return{
-      user: state.user
-  }
-}
+// const mapstateToProps = state => {
+//   return{
+//       user: state.user
+//   }
+// }
 
-export default connect(mapstateToProps, mapDispatchToProps)(Example);
+// export default connect(mapstateToProps, mapDispatchToProps)(Example);
+
+export default Example;

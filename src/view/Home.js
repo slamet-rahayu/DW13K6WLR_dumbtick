@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../App.css';
-import {Form, FormControl, Button} from 'react-bootstrap'
 import Content from '../components/Content'
 import Upcoming from '../components/Upcoming'
 import Category from '../components/Category'
@@ -22,7 +21,6 @@ class Home extends Component{
         this.setState({[e.target.name]: e.target.value})
     }
     render() {
-        console.log(this.state.filter)
 return (
 <text>
 <Header />

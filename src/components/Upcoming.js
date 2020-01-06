@@ -1,15 +1,15 @@
+import { getUser } from '../_actions/useraction'
+import { getEvents } from '../_actions/eventsaction'
+import { connect } from 'react-redux'
+import { bindActionCreators } from "redux"
 import React, { Component } from 'react';
-import { Navbar, Nav, Button} from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
+import { Button} from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck';
 import axios from 'axios';
 import '../App.css';
 import Moment from 'react-moment'
-import Buy from '../components/Buymodal'
-import { now } from 'moment';
 
 const jwt = require('jsonwebtoken')
 const tokenraw = localStorage.getItem('token')
@@ -43,10 +43,9 @@ class Content extends Component {
         this.setState({data: res.data})
     })
     }
-    favToggler = e => {
-        
-    }
     render(){
+        // const {user} = this.props.user
+        // const {events} = this.props.events
         const event = this.state.data
         const upcoming = event.filter(event=>{
         const date = new Date(event.startTime)
@@ -59,7 +58,7 @@ class Content extends Component {
         return(
         <text>
         <div className="album">
-        <Row>{this.state.data.map((s,k)=>{
+        <Row>{event.map((s,k)=>{
             return(
                 <Col sm={4} className="mb-4">
                 <Card>
@@ -67,7 +66,7 @@ class Content extends Component {
                 variant="light"
                 style={{position:"absolute",marginLeft:"75%",
                 color:"red",marginTop:"2%",fontWeight:"bold",fontSize:"10px"}}>
-                    {s.price}
+                    Rp. {s.price}
                 </Button>
                     <a href={'/eventdetail?id='+(s.id)}>    
                     <Card.Img variant="top" 
@@ -109,4 +108,20 @@ class Content extends Component {
     }
 }
 
-export default Content;
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         getUser: bindActionCreators(getUser, dispatch),
+//         getEvents: bindActionCreators(getEvents, dispatch)
+//     }
+// }
+
+// const mapstateToProps = state => {
+//     return{
+//         user: state.user,
+//         events: state.events
+//     }
+// }
+
+// export default connect(mapstateToProps, mapDispatchToProps)(Content);
+
+export default Content

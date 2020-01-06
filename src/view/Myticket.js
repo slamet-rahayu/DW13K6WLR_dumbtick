@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Button} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../App.css';
-import Register from '../App';
-import Login from './Login';
 import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck'
-import Content from '../components/Content'
 import axios from 'axios'
 import Header from '../components/Header'
 import Footer from '../components/Footer'

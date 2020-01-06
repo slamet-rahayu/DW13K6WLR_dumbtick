@@ -2,6 +2,8 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 
 import  user from "../_reducers/usereducer";
 import  events from "../_reducers/eventsreducer";
+import  category from "../_reducers/categoryreducer";
+import  categorypg from "../_reducers/categoryreducer";
 
 import { logger } from '../middleware';
 
@@ -11,7 +13,9 @@ import thunkMiddleware from 'redux-thunk';
 //Global State come from here
 const reducers = combineReducers({
   user,
-  events
+  events,
+  category,
+  categorypg,
 });
 
 //Setup Store Redux

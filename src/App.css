@@ -280,3 +280,7 @@ select:focus{
 body {
   background-color: #f2eee5;
 }
+
+h2{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

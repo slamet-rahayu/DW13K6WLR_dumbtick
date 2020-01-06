@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Button} from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
+import { Button } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck';
 import axios from 'axios';
 import '../App.css';
 import Moment from 'react-moment'
-import Buy from '../components/Buymodal'
-import { now } from 'moment';
 
 const jwt = require('jsonwebtoken')
 const tokenraw = localStorage.getItem('token')

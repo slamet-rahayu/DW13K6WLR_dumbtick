@@ -42,11 +42,11 @@ class Content extends Component {
     .then(res=>{
         this.setState({data: res.data})
     })
-    this.props.getEvents()
+    // this.props.getEvents()
     }
     render(){
-        const {user} = this.props.user
-        const {events} = this.props.events
+        // const {user} = this.props.user
+        // const {events} = this.props.events
         const event = this.state.data
         const today = event.filter(event=>{
         const date = new Date(event.startTime)
@@ -60,12 +60,10 @@ class Content extends Component {
         })
         const datas = today.filter((data)=>{return data.title.toLowerCase().indexOf(this.props.filter.toLowerCase()) !== -1})
         const userid = this.state.user.id
-        console.log('events', events)
-        console.log('user', user)
         return(
         <text>
         <div className="album">
-        <Row>{events.map((s,k)=>{
+        <Row>{event.map((s,k)=>{
             return(
                 <Col sm={4} className="mb-4">
                 <Card>
@@ -73,7 +71,7 @@ class Content extends Component {
                 variant="light"
                 style={{position:"absolute",marginLeft:"75%",
                 color:"red",marginTop:"2%",fontWeight:"bold",fontSize:"10px"}}>
-                    {s.price}
+                    Rp. {s.price}
                 </Button>
                     <a href={'/eventdetail?id='+(s.id)}>    
                     <Card.Img variant="top" 
@@ -119,18 +117,20 @@ class Content extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        getUser: bindActionCreators(getUser, dispatch),
-        getEvents: bindActionCreators(getEvents, dispatch)
-    }
-}
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         getUser: bindActionCreators(getUser, dispatch),
+//         getEvents: bindActionCreators(getEvents, dispatch)
+//     }
+// }
 
-const mapstateToProps = state => {
-    return{
-        user: state.user,
-        events: state.events
-    }
-}
+// const mapstateToProps = state => {
+//     return{
+//         user: state.user,
+//         events: state.events
+//     }
+// }
 
-export default connect(mapstateToProps, mapDispatchToProps)(Content);
+// export default connect(mapstateToProps, mapDispatchToProps)(Content);
+
+export default Content;

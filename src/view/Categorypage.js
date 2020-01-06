@@ -1,17 +1,17 @@
+import { getCatPage } from '../_actions/categoryaction'
+import { connect } from 'react-redux'
+import { bindActionCreators } from "redux"
 import React, { Component } from 'react';
-import { Navbar, Nav, Button} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../App.css';
 import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck'
-import Content from '../components/Content'
 import axios from 'axios'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Moment from 'react-moment'
-import { now } from 'moment';
 
 const query = new URLSearchParams(window.location.search)
 const id = query.get('id')
@@ -35,11 +35,12 @@ class Categorydetail extends Component{
     .then(res=>{
       this.setState({data: res.data, datacontent: res.data.events})
     })
+    this.props.getCatPage(id)
   }
   render(){
+    // const {categorypg} = this.props.categorypg
     const data = this.state.datacontent
     const datas = data.filter((data)=>{return data.startTime.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1})
-      console.log(datas)
     return(
       <text>
         <Header />
@@ -90,5 +91,19 @@ class Categorydetail extends Component{
     )
   }
 }
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//       getCatPage: bindActionCreators(getCatPage, dispatch)
+//   }
+// }
+
+// const mapstateToProps = state => {
+//   return{
+//       categorypg: state.categorypg
+//   }
+// }
+
+// export default connect(mapstateToProps, mapDispatchToProps)(Categorydetail);
 
 export default Categorydetail;

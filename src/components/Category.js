@@ -1,3 +1,6 @@
+import { getCategory } from '../_actions/categoryaction'
+import { connect } from 'react-redux'
+import { bindActionCreators } from "redux"
 import React, { Component } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -18,8 +21,10 @@ class Category extends Component {
             this.setState({data: res.data})
             console.log(res)
         })
+        // this.props.getCategory()
     }
     render(){
+        // const {category} = this.props.category
         return(
             <center>
                 <Row>
@@ -38,4 +43,18 @@ class Category extends Component {
     }
 }
 
-export default Category
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         getCategory: bindActionCreators(getCategory, dispatch)
+//     }
+// }
+
+// const mapstateToProps = state => {
+//     return{
+//         category: state.category
+//     }
+// }
+
+// export default connect(mapstateToProps, mapDispatchToProps)(Category);
+
+export default Category;

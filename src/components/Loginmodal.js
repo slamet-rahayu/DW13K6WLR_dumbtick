@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-import { ButtonToolbar } from 'react-bootstrap';
 import '../App.css';
 import '../App';
-import {Route, BrowserRouter, Redirect} from 'react-router-dom';
-import Apps from '../App';
 import axios from 'axios'
 
 function MyVerticallyCenteredModal(props) {

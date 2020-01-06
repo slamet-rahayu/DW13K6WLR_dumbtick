@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Button, ButtonGroup} from 'react-bootstrap';
+import { Button, ButtonGroup} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../App.css';
-import Register from '../App';
 import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck'
-import Content from '../components/Content'
 import axios from 'axios'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -54,7 +51,6 @@ class Categorydetail extends Component{
       axios.get('http://localhost:5000/api/v1/user/'+token.userId)
      .then(res=>{
        this.setState({user: res.data})
-       console.log(res)
      })
      }
     axios.get('http://localhost:5000/api/v1/eventdetail/'+(id))
@@ -167,7 +163,7 @@ class Categorydetail extends Component{
         <Col>
         <center><h3>Location</h3></center>
          <p style={{fontSize:"13px", lineHeight:"1.5"}}>{this.state.data.address}</p>
-         <center><p><iframe 
+         <center><p><iframe title="maps"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3212.3660793361587!2d106.80389742161134!3d-6.2207402908963125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7f2d1c6db9fe661f!2sIstora%20Stadium!5e0!3m2!1sen!2sid!4v1577618273611!5m2!1sen!2sid" width="550" height="250" frameborder="0" style={{border:"0"}} allowfullscreen="">
           </iframe></p></center>
           <p><center><h3>Share Event</h3></center></p>

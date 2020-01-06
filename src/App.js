@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import left from './left.png';
-import right from './right.png';
 import './App.css';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
@@ -24,13 +22,12 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header> */}
       <Modal.Body>
-        <a href="" onClick={props.onHide} style={{marginLeft:"94%",position:"absolute",fontSize:"25px",color:"black"}}>&times;</a>
+        {/* <a href="" onClick={props.onHide} style={{marginLeft:"94%",position:"absolute",fontSize:"25px",color:"black"}}>&times;</a> */}
         
         {/* <Modal.Title id="contained-modal-title-vcenter">
           <h4>hello</h4>
         </Modal.Title> */}
-        <h3 align="center"><b>Register</b></h3>
-
+        <h3 align="center" style={{marginBottom:"20px"}}><b>Register</b></h3>
         <center>
         <FormRegister />
         </center>
@@ -79,7 +76,6 @@ class FormRegister extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
     formSubmit(e) {
-        e.preventDefault()
         axios.post('http://localhost:5000/api/v1/register', {
           firstname: this.state.firstname,
           lastname: this.state.lastname,
@@ -90,6 +86,7 @@ class FormRegister extends Component {
           email: this.state.email,
           password: this.state.password
         })
+        .then(res=>alert(res))
     }
     render() {
         return(
@@ -101,6 +98,7 @@ class FormRegister extends Component {
              name="firstname"
              onChange={this.formHandler}
              value={this.state.firstname}
+             required
             ></input><br></br><br></br>
             <label>Lastname</label>
             <input type="text"
@@ -109,6 +107,7 @@ class FormRegister extends Component {
              name="lastname"
              onChange={this.formHandler}
              value={this.state.lastname}
+             required
             ></input><br></br><br></br>
             <label>Date Of Birth</label>
             <input type="date"
@@ -117,6 +116,7 @@ class FormRegister extends Component {
              name="dateOfBirth"
              onChange={this.formHandler}
              value={this.state.dateOfBirth}
+             required
             ></input><br></br><br></br>            
             <label>E-mail &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="email"
@@ -125,14 +125,16 @@ class FormRegister extends Component {
             name="email"
             onChange={this.formHandler}
             value={this.state.email}
+            required
             ></input><br></br><br></br>
-    <label>{this.state.phone}</label>
+            <label>Phone</label>
             <input type="text"
              placeholder="&#128712;"
              style={{border:"none",borderBottom:"2px solid grey"}}
              name="phone"
              onChange={this.formHandler}
              value={this.state.phone}
+             required
             ></input><br></br><br></br>
             <label>Password</label>
             <input type="password"
@@ -141,8 +143,9 @@ class FormRegister extends Component {
              name="password"
              onChange={this.formHandler}
              value={this.state.password}
+             required
              ></input><br></br><br></br>
-            <button className="btn btn-dark" type="submit">Registration</button><br></br><br></br><br></br>
+            <button className="btn btn-dark" type="submit">Register</button><br></br><br></br><br></br>
         </form>
         )
     }
