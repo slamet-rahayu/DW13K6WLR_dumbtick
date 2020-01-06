@@ -26,7 +26,7 @@ class Content extends Component {
     componentDidMount() {
     if (localStorage.getItem('token') !== null) {
      const token = jwt.verify(tokenraw, 'pssst!')
-     axios.get('http://localhost:5000/api/v1/favourites/'+token.userId)
+     axios.get('https://dumb-tick-express.herokuapp.com/api/v1/favourites/'+token.userId)
     .then(res=>{
       this.setState({data: res.data.favourites})
     })

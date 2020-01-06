@@ -76,7 +76,7 @@ class FormRegister extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
     formSubmit(e) {
-        axios.post('http://localhost:5000/api/v1/register', {
+        axios.post('https://dumb-tick-express.herokuapp.com/api/v1/register', {
           firstname: this.state.firstname,
           lastname: this.state.lastname,
           username: '@'+this.state.firstname,

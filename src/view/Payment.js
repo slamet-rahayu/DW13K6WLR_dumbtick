@@ -32,7 +32,7 @@ class Payment extends Component{
     this.submitHandler = this.submitHandler.bind(this)
   }
   submitHandler(e){
-    axios.post('http://localhost:5000/api/v1/payments',{
+    axios.post('https://dumb-tick-express.herokuapp.com/api/v1/payments',{
             orderBy: this.state.user.id,
             event_id: this.state.data.id,
             amount: amount
@@ -42,16 +42,16 @@ class Payment extends Component{
   componentDidMount() {
     if (localStorage.getItem('token') !== null) {
       const token = jwt.verify(tokenraw, 'pssst!')
-      axios.get('http://localhost:5000/api/v1/user/'+token.userId)
+      axios.get('https://dumb-tick-express.herokuapp.com/api/v1/user/'+token.userId)
      .then(res=>{
        this.setState({user: res.data})
      })
-     axios.get('http://localhost:5000/api/v1/payments/'+token.userId)
+     axios.get('https://dumb-tick-express.herokuapp.com/api/v1/payments/'+token.userId)
      .then(res=>{
        this.setState({paydata: res.data.payments})
      })
      }
-    axios.get('http://localhost:5000/api/v1/eventdetail/'+idev)
+    axios.get('https://dumb-tick-express.herokuapp.com/api/v1/eventdetail/'+idev)
     .then(res=>{
       this.setState({data: res.data})
     })
@@ -126,7 +126,7 @@ class Buttonconf extends Component{
     this.submitHandler = this.submitHandler.bind(this)
   }
   submitHandler(e){
-    axios.post('http://localhost:5000/api/v1/payments',{
+    axios.post('https://dumb-tick-express.herokuapp.com/api/v1/payments',{
             orderBy: this.state.user.id,
             event_id: this.state.data.id,
             amount: amount
@@ -136,16 +136,16 @@ class Buttonconf extends Component{
   componentDidMount() {
     if (localStorage.getItem('token') !== null) {
       const token = jwt.verify(tokenraw, 'pssst!')
-      axios.get('http://localhost:5000/api/v1/user/'+token.userId)
+      axios.get('https://dumb-tick-express.herokuapp.com/api/v1/user/'+token.userId)
      .then(res=>{
        this.setState({user: res.data})
      })
-     axios.get('http://localhost:5000/api/v1/payments/'+token.userId)
+     axios.get('https://dumb-tick-express.herokuapp.com/api/v1/payments/'+token.userId)
      .then(res=>{
        this.setState({paydata: res.data.payments})
      })
      }
-    axios.get('http://localhost:5000/api/v1/eventdetail/'+idev)
+    axios.get('https://dumb-tick-express.herokuapp.com/api/v1/eventdetail/'+idev)
     .then(res=>{
       this.setState({data: res.data})
     })

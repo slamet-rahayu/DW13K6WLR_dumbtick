@@ -39,7 +39,7 @@ class Profile extends Component{
     this.setState({[e.target.name]: e.target.value})
   }
   formSubmit(e){
-    axios.patch('http://localhost:5000/api/v1/user/'+(this.state.user.id),{
+    axios.patch('https://dumb-tick-express.herokuapp.com/api/v1/user/'+(this.state.user.id),{
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       username: '@'+this.state.firstname,
@@ -56,12 +56,12 @@ class Profile extends Component{
   componentDidMount() {
     if (localStorage.getItem('token') !== null) {
      const token = jwt.verify(tokenraw, 'pssst!')
-     axios.get('http://localhost:5000/api/v1/user/'+token.userId)
+     axios.get('https://dumb-tick-express.herokuapp.com/api/v1/user/'+token.userId)
     .then(res=>{
       this.setState({user: res.data})
     })
     }
-    axios.get('http://localhost:5000/api/v1/categories/3')
+    axios.get('https://dumb-tick-express.herokuapp.com/api/v1/categories/3')
     .then(res=>{
       this.setState({data: res.data, datacontent: res.data.events})
     })

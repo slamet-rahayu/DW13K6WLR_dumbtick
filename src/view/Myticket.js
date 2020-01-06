@@ -29,7 +29,7 @@ class Profile extends Component{
   componentDidMount() {
     if (localStorage.getItem('token') !== null) {
       const token = jwt.verify(tokenraw, 'pssst!')
-     axios.get('http://localhost:5000/api/v1/confirmed/'+token.userId)
+     axios.get('https://dumb-tick-express.herokuapp.com/api/v1/confirmed/'+token.userId)
      .then(res=>{
        this.setState({user: res.data, data: res.data.payments})
      })

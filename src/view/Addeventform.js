@@ -38,12 +38,12 @@ class Profile extends Component{
   componentDidMount() {
     if (localStorage.getItem('token') !== null) {
       const token = jwt.verify(tokenraw, 'pssst!')
-      axios.get('http://localhost:5000/api/v1/user/'+token.userId)
+      axios.get('https://dumb-tick-express.herokuapp.com/api/v1/user/'+token.userId)
      .then(res=>{
        this.setState({user: res.data})
      })
      }
-    axios.get('http://localhost:5000/api/v1/categories/')
+    axios.get('https://dumb-tick-express.herokuapp.com/api/v1/categories/')
     .then(res=>{
       this.setState({data: res.data})
     })
@@ -52,7 +52,7 @@ class Profile extends Component{
     this.setState({[e.target.name]: e.target.value})
   }
   formSubmit(e){
-    axios.post('http://localhost:5000/api/v1/storeevent', {
+    axios.post('https://dumb-tick-express.herokuapp.com/api/v1/storeevent', {
       title: this.state.title,
       category_id: this.state.category,
       startTime: this.state.startTime,

@@ -16,7 +16,7 @@ class Category extends Component {
         }
     }
     componentDidMount() {
-        axios.get('http://localhost:5000/api/v1/categories')
+        axios.get('https://dumb-tick-express.herokuapp.com/api/v1/categories')
         .then(res=>{
             this.setState({data: res.data})
             console.log(res)
@@ -32,7 +32,7 @@ class Category extends Component {
                     return(
                     <Col>
                     <a className="categorylink" href={'/Categorypage?id='+(s.id)}>
-                    <img className="categoryimg" style={{borderRadius:"5px"}} width="250" height="80" alt="category" src={'http://localhost:5000/images/'+(s.name)+'.jpg'} />
+                    <img className="categoryimg" style={{borderRadius:"5px"}} width="250" height="80" alt="category" src={'https://dumb-tick-express.herokuapp.com/images/'+(s.name)+'.jpg'} />
                     <h3 style={{position:"absolute",marginTop:"-28%",marginLeft:"5%",color:"white"}}>{s.name}</h3></a>
                     </Col>
                     )

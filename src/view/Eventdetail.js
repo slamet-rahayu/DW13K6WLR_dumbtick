@@ -48,12 +48,12 @@ class Categorydetail extends Component{
   componentDidMount() {
     if (localStorage.getItem('token') !== null) {
       const token = jwt.verify(tokenraw, 'pssst!')
-      axios.get('http://localhost:5000/api/v1/user/'+token.userId)
+      axios.get('https://dumb-tick-express.herokuapp.com/api/v1/user/'+token.userId)
      .then(res=>{
        this.setState({user: res.data})
      })
      }
-    axios.get('http://localhost:5000/api/v1/eventdetail/'+(id))
+    axios.get('https://dumb-tick-express.herokuapp.com/api/v1/eventdetail/'+(id))
     .then(res=>{
       this.setState({data: res.data, datacategory: res.data.category})
       this.setState({price: res.data.price})

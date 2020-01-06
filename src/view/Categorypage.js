@@ -31,7 +31,7 @@ class Categorydetail extends Component{
     this.setState({filter: e.target.value})
   }
   componentDidMount() {
-    axios.get('http://localhost:5000/api/v1/categories/'+id)
+    axios.get('https://dumb-tick-express.herokuapp.com/api/v1/categories/'+id)
     .then(res=>{
       this.setState({data: res.data, datacontent: res.data.events})
     })
