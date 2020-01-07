@@ -76,7 +76,10 @@ class Content extends Component {
                     <button style={{float:"right", background:"none", border:"none"}}
                     onClick={()=>
                     (this.state.favs.find(e=>e['event_id'] === s.id)) ? 
-                    axios.delete('https://dumb-tick-express.herokuapp.com/api/v1/deletefav/')
+                      axios.post('https://dumb-tick-express.herokuapp.com/api/v1/deletefav',{
+                        user_id: userid,
+                        event_id: s.id
+                        })
                      : axios.post('https://dumb-tick-express.herokuapp.com/api/v1/addfav',{
                         user_id: userid,
                         event_id: s.id
