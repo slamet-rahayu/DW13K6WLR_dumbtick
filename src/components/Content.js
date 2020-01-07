@@ -78,6 +78,7 @@ class Content extends Component {
                     src={s.img} />
                     </a>
                     <Card.Body>
+                    <form>
                     <button style={{float:"right", background:"none", border:"none"}}
                     onClick={()=>
                     (this.state.favs.find(e=>e['event_id'] === s.id)) ? 
@@ -92,6 +93,7 @@ class Content extends Component {
                         }>
                     {this.state.favs.find(e=>e['event_id'] === s.id) ? <i style={{fontSize:"20px",color:"red"}} class="fa fa-heart"></i> : <i style={{fontSize:"20px",color:"black"}} class="fa fa-heart"></i>}
                     </button>
+                    </form>
                     <a href={'/eventdetail?id='+(s.id)}>
                     <Card.Title>{s.title.substring(0,30)}</Card.Title>
                     </a>
