@@ -26,8 +26,8 @@ class Category extends Component {
     render(){
         // const {category} = this.props.category
         return(
-            <center>
                 <Row>
+                
                 {this.state.data.map((s,k)=> {
                     return(
                     <Col>
@@ -37,8 +37,8 @@ class Category extends Component {
                     </Col>
                     )
                 })}
+                
                 </Row>
-            </center>
         )
     }
 }

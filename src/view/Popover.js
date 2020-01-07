@@ -22,19 +22,17 @@ function Example() {
       <ButtonToolbar ref={ref}>
         <button 
         onClick={handleClick}
-        style={{borderRadius:"100%",width:"35px",height:"35px",border:"none",background:"green",color:"white"}}><b>R</b></button>
+        style={{borderRadius:"100%",width:"40px",height:"40px",border:"none",background:"green",color:"white"}}><b>R</b></button>
   
         <Overlay
           show={show}
           target={target}
           placement="bottom"
           container={ref.current}
-          containerPadding={20}
+          containerPadding={-1}
         >
           <Popover id="popover">
               <Popover.Title>
-              <div className="profile">R</div>
-              <p></p>
               <Profiletitle />
               </Popover.Title>
           <Popover.Content>

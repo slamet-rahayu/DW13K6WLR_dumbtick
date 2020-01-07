@@ -23,8 +23,11 @@ class Auth extends Component {
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
+                    
                     </Nav>
+                    <div style={{marginRight:"30px"}}>
                     <Profile />
+                    </div>
                   </Navbar.Collapse>
                 </Navbar>
                 <br></br>

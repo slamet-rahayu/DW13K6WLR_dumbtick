@@ -105,7 +105,7 @@ class Content extends Component {
                     </Card.Body>
                     <Card.Footer>
                     <small className="text-muted">
-                    {s.description.substring(0,200)} . . .    
+                    {s.description.substring(0,150)} . . .    
                     </small>
                     </Card.Footer>
                 </Card>

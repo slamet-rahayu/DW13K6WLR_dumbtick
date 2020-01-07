@@ -22,7 +22,7 @@ class FormRegister extends Component {
     }
     formSubmit(e) {
         e.preventDefault()
-        axios.post('http://localhost:8090/api/v1/register', {
+        axios.post('https://dumb-tick-express.herokuapp.com/api/v1/register', {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             username: '@'+this.state.firstname,

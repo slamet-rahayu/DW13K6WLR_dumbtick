@@ -49,19 +49,25 @@ class Profile extends Component{
       email: this.state.email,
       password: this.state.password
     })
-    .then(res=>{
-      alert('sukses', res)
-    })
+    window.location='/Profile'
   }
   componentDidMount() {
     if (localStorage.getItem('token') !== null) {
      const token = jwt.verify(tokenraw, 'pssst!')
      axios.get('https://dumb-tick-express.herokuapp.com/api/v1/user/'+token.userId)
     .then(res=>{
-      this.setState({user: res.data})
+      this.setState({
+        user: res.data,
+        firstname: res.data.firstname,
+        lastname: res.data.lastname,
+        dateOfBirth: res.data.dateOfBirth,
+        phone: res.data.phone,
+        email: res.data.email,
+        password: res.data.password,
+      })
     })
     }
-    axios.get('https://dumb-tick-express.herokuapp.com/api/v1/categories/3')
+    axios.get('https://dumb-tick-express.herokuapp.com/api/v1/categories/'+this.state.user.id)
     .then(res=>{
       this.setState({data: res.data, datacontent: res.data.events})
     })
@@ -86,7 +92,7 @@ class Profile extends Component{
              style={{border:"none",borderBottom:"2px solid grey", width:"100%", background:"transparent"}}
              name="firstname"
              placeholder="First Name"
-             value={this.state.user.firstname}
+             value={this.state.firstname}
              onChange={this.formHandler}
              ></input> </p>
             <p><input 
@@ -94,35 +100,35 @@ class Profile extends Component{
             style={{border:"none",borderBottom:"2px solid grey", width:"100%", background:"transparent"}}
             name="lastname"
             placeholder="Last Name"
-            value={this.state.user.lastname}
+            value={this.state.lastname}
             onChange={this.formHandler}
             ></input> </p>
             <p><input type="date"
             style={{border:"none",borderBottom:"2px solid grey", width:"100%", background:"transparent"}}
             name="dateOfBirth"
             placeholder="Date Of Birth"
-            value={this.state.user.dateOfBirth}
+            value={this.state.dateOfBirth}
             onChange={this.formHandler}
             ></input> </p>
             <p><input type="text"
             style={{border:"none",borderBottom:"2px solid grey", width:"100%", background:"transparent"}}
             name="phone"
             placeholder="Phone"
-            value={this.state.user.phone}
+            value={this.state.phone}
             onChange={this.formHandler}
             ></input> </p> 
             <p><input type="email"
             style={{border:"none",borderBottom:"2px solid grey", width:"100%", background:"transparent"}}
             name="email"
             placeholder="E-mail"
-            value={this.state.user.email}
+            value={this.state.email}
             onChange={this.formHandler}
             ></input> </p>
             <p><input type="password"
             style={{border:"none",borderBottom:"2px solid grey", width:"100%", background:"transparent"}}
             name="password"
             placeholder="Password"
-            value={this.state.user.password}
+            value={this.state.password}
             onChange={this.formHandler}
             ></input> </p>
             </form>       

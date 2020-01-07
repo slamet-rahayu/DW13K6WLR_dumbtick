@@ -15,6 +15,8 @@ import Moment from 'react-moment'
 
 const query = new URLSearchParams(window.location.search)
 const id = query.get('id')
+const jwt = require('jsonwebtoken')
+const tokenraw = localStorage.getItem('token')
 
 
 class Categorydetail extends Component{
@@ -23,6 +25,8 @@ class Categorydetail extends Component{
     this.state = {
       data: [],
       datacontent: [],
+      user: [],
+      favs: [],
       filter: '',
       Loading: false
     }
@@ -31,6 +35,17 @@ class Categorydetail extends Component{
     this.setState({filter: e.target.value})
   }
   componentDidMount() {
+    if (localStorage.getItem('token') !== null) {
+      const token = jwt.verify(tokenraw, 'pssst!')
+     axios.get('https://dumb-tick-express.herokuapp.com/api/v1/user/'+token.userId)
+     .then(res=>{
+       this.setState({user: res.data})
+     })
+     axios.get('https://dumb-tick-express.herokuapp.com/api/v1/favourites/'+token.userId)
+     .then(res=>{
+       this.setState({favs: res.data.favourites})
+     })
+     }
     axios.get('https://dumb-tick-express.herokuapp.com/api/v1/categories/'+id)
     .then(res=>{
       this.setState({data: res.data, datacontent: res.data.events})
@@ -39,13 +54,18 @@ class Categorydetail extends Component{
   }
   render(){
     // const {categorypg} = this.props.categorypg
+    const userid = this.state.user.id
     const data = this.state.datacontent
     const datas = data.filter((data)=>{return data.startTime.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1})
     return(
       <text>
         <Header />
       <Container>
-        <input type="date" onChange={this.filterHandler} />
+      <label style={{marginLeft:"-0.5%"}}>Filter By Date</label>
+        <input type="date" onChange={this.filterHandler}
+        style={{border:"none",borderBottom:"2px solid grey", width:"100%", background:"none"}}
+         />
+      <br></br>
       <br></br>
       <Row>
         <Col>
@@ -56,28 +76,48 @@ class Categorydetail extends Component{
       <div className="album">
       <Row>{datas.map((s,k)=>{
             return(
-                <Col sm={4} className="mb-4">
+              <Col sm={4} className="mb-4">
                 <Card>
-                <Button variant="light"
-                    style={{position:"absolute",marginLeft:"75%",
-                    color:"red",marginTop:"2%",fontWeight:"bold",fontSize:"10px"}}
-                    >Rp. {s.price}</Button>
+                <Button 
+                variant="light"
+                style={{position:"absolute",marginLeft:"75%",
+                color:"red",marginTop:"2%",fontWeight:"bold",fontSize:"10px"}}>
+                    Rp. {s.price}
+                </Button>
+                    <a href={'/eventdetail?id='+(s.id)}>    
                     <Card.Img variant="top" 
                     src={s.img} />
-                    <a href={'/eventdetail?id='+(s.id)}>
+                    </a>
                     <Card.Body>
-                    <Card.Title>{s.title}</Card.Title>
+                    <button style={{float:"right", background:"none", border:"none"}}
+                    onClick={()=>
+                    (this.state.favs.find(e=>e['event_id'] === s.id)) ? 
+                    axios.post('https://dumb-tick-express.herokuapp.com/api/v1/deletefav/', {
+                        user_id: userid,
+                        event_id: s.id
+                    })
+                     : axios.post('https://dumb-tick-express.herokuapp.com/api/v1/addfav',{
+                        user_id: userid,
+                        event_id: s.id
+                        })
+                        }>
+                    {this.state.favs.find(e=>e['event_id'] === s.id) ? <i style={{fontSize:"20px",color:"red"}} class="fa fa-heart"></i> : <i style={{fontSize:"20px",color:"black"}} class="fa fa-heart"></i>}
+                    </button>
+                    <a href={'/eventdetail?id='+(s.id)}>
+                    <Card.Title>{s.title.substring(0,30)}</Card.Title>
+                    </a>
                     <Card.Text>
+                    <h5>
                     <Moment format="DD MMM YYYY">
                     {s.startTime}
                     </Moment>
+                    </h5>
                     </Card.Text>
                     </Card.Body>
-                    </a>
                     <Card.Footer>
-                    <a href="!#">
-                    <small className="text-muted"><i class="fa fa-heart"></i> Add favourite</small>
-                    </a>
+                    <small className="text-muted">
+                    {s.description.substring(0,150)} . . .    
+                    </small>
                     </Card.Footer>
                 </Card>
                 </Col>

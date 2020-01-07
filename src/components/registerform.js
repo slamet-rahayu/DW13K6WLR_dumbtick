@@ -15,7 +15,7 @@ class LoginForm extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
     formSubmit(e) {
-        axios.post('http://localhost:8090/api/v1/login', {
+        axios.post('https://dumb-tick-express.herokuapp.com/api/v1/login', {
             email: this.state.email,
             password: this.state.password
         }).then(res=> {
