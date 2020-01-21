@@ -43,6 +43,8 @@ class Profile extends Component{
     ]
     const string = array.toString()
     const d = new Date()
+    const date = d.getDay()
+    console.log('date', date)
     return(
         <text>
         <Header />
@@ -60,7 +62,8 @@ class Profile extends Component{
           <br></br>
             <Card>
             <Card.Header>{(this.state.user.firstname)+' '+(this.state.user.lastname)}
-            {s.event.startTime === new Date() ? '' : <text style={{fontWeight:"bold",color:"red", float:"right"}}>Expired</text> }
+            {/* {s.event.startTime === new Date() ? '' : <text style={{fontWeight:"bold",color:"red", float:"right"}}>Expired</text> } */}
+            {s.event.startTime}
             </Card.Header>
                 <Card.Body>
                 <Card.Title><b>{s.event.title}</b><text style={{float:"right"}}>Rp. {s.event.price}</text></Card.Title>

@@ -11,19 +11,21 @@ import Profile from '../view/Popover'
 
 class Auth extends Component {
     componentDidMount(){
-        // this.props.getUser()
+        if(localStorage.getItem('token') !== null){
+        this.props.getUser()
+        }
     }
     render() {
-        // const {user} = this.props.user
+        const {user} = this.props.user
         if (localStorage.getItem('token') !== null) {
             return(
                 <div>
-                <Navbar bg="danger" expand="sm" style={{boxShadow:"grey 0px 2px 5px"}}>
+                <Navbar bg="danger" expand="sm" style={{boxShadow:"grey 0px 2px 5px", marginBottom:"auto"}}>
                 <Navbar.Brand href="/" style={{fontWeight:"bold",fontSize:"30px",color:"white"}}><i class="fa fa-ticket"></i> Dumb Tick</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                    
+
                     </Nav>
                     <div style={{marginRight:"30px"}}>
                     <Profile />

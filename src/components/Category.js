@@ -16,19 +16,13 @@ class Category extends Component {
         }
     }
     componentDidMount() {
-        axios.get('https://dumb-tick-express.herokuapp.com/api/v1/categories')
-        .then(res=>{
-            this.setState({data: res.data})
-            console.log(res)
-        })
-        // this.props.getCategory()
+        this.props.getCategory()
     }
     render(){
-        // const {category} = this.props.category
+        const {category} = this.props.category
         return(
                 <Row>
-                
-                {this.state.data.map((s,k)=> {
+                {category.map((s,k)=> {
                     return(
                     <Col>
                     <a className="categorylink" href={'/Categorypage?id='+(s.id)}>
@@ -43,18 +37,18 @@ class Category extends Component {
     }
 }
 
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         getCategory: bindActionCreators(getCategory, dispatch)
-//     }
-// }
+function mapDispatchToProps(dispatch) {
+    return {
+        getCategory: bindActionCreators(getCategory, dispatch)
+    }
+}
 
-// const mapstateToProps = state => {
-//     return{
-//         category: state.category
-//     }
-// }
+const mapstateToProps = state => {
+    return{
+        category: state.category
+    }
+}
 
-// export default connect(mapstateToProps, mapDispatchToProps)(Category);
+export default connect(mapstateToProps, mapDispatchToProps)(Category);
 
-export default Category;
+// export default Category;

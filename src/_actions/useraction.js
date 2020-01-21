@@ -9,7 +9,7 @@ export const getUser = () => {
     const jwt = require('jsonwebtoken')
     const token = jwt.verify(tokenraw, 'pssst!')
     return(dispatch) => {
-        return axios.get('http://localhost:5000/api/v1/user/'+token.userId)
+        return axios.get('https://dumb-tick-express.herokuapp.com/api/v1/user/'+token.userId)
             .then(user => {
             dispatch({
                     type: GET_USER,

@@ -66,6 +66,7 @@ class Form extends Component {
     this.state = {
       email: '',
       password: '',
+      errormsg: '',
       isLoggedIn: false
     }
     this.formHandler = this.formHandler.bind(this)
@@ -75,47 +76,45 @@ class Form extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
   submitHandler(e){
-    // e.preventDefault()
-    axios.post('https://dumb-tick-express.herokuapp.com/api/v1/login', {
+    if (this.state.password.length < 1 || this.state.email.length < 1) {
+      this.setState({errormsg: 'please enter your email and password!'})
+    } else {
+      axios.post('https://dumb-tick-express.herokuapp.com/api/v1/login', {
       email: this.state.email,
       password: this.state.password
-    }).then(res=> {
-      const firstname = res.data.user.firstname
-      const lastname = res.data.user.lastname
-      const username = res.data.user.username
-      const email = res.data.user.email
-      const id = res.data.user.id
-      localStorage.setItem('token', res.data.token)
+    }).then(res=>{
+      if (res.data.token !== undefined) {
+        localStorage.setItem('token', res.data.token)
+        window.location.reload()
+      }else{
+        this.setState({errormsg: res.data.error})
+      }
     })
-    .catch(error=>{
-      console.log(error)
-    })
-    window.location.reload()
+    }
   }
 render () {
   return (
     <div>
-      
-            <label>Your email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="email"
-            name="email"
-             placeholder="&#128712;"
-            style={{border:"none",borderBottom:"1px solid grey"}} 
-            value={this.state.email}
-             onChange={this.formHandler}
-             required
-             ></input><br></br><br></br>
-            <label>Your password</label>
-            <input type="password"
-            name="password"
-             placeholder="&#128712;"
-            style={{border:"none",borderBottom:"1px solid grey"}}
-            value={this.state.password}
-             onChange={this.formHandler}
-             required
-             ></input><br></br><br></br><br></br>
-            <button className="btn btn-dark" onClick={this.submitHandler}>Login</button><br></br><br></br><br></br>
-      
+        <label>Your email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="email"
+        name="email"
+          placeholder="&#128712;"
+        style={{border:"none",borderBottom:"1px solid grey"}} 
+        value={this.state.email}
+          onChange={this.formHandler}
+          required
+          ></input><br></br><br></br>
+        <label>Your password</label>
+        <input type="password"
+        name="password"
+          placeholder="&#128712;"
+        style={{border:"none",borderBottom:"1px solid grey"}}
+        value={this.state.password}
+          onChange={this.formHandler}
+          required
+          ></input><br></br><br></br><br></br>
+        <button className="btn btn-dark" type="submit" onClick={this.submitHandler}>Login</button><br></br><br></br><br></br>
+        <center><text style={{color:"red"}}>{this.state.errormsg}</text></center>
     </div>
   )
 }

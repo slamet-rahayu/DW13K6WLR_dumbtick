@@ -22,7 +22,7 @@ function Example() {
       <ButtonToolbar ref={ref}>
         <button 
         onClick={handleClick}
-        style={{borderRadius:"100%",width:"40px",height:"40px",border:"none",background:"green",color:"white"}}><b>R</b></button>
+        style={{borderRadius:"100%",width:"40px",height:"40px",border:"none",background:"green",color:"white"}}><b><Avatar /></b></button>
   
         <Overlay
           show={show}
@@ -71,7 +71,7 @@ function Example() {
     constructor(props){
       super(props)
       this.state = {
-        user: '',
+        user: [],
       }
     }
     componentDidMount() {
@@ -87,6 +87,30 @@ function Example() {
     render() {
       return(
         <text><p><a href="/profile" >{(this.state.user.firstname)+' '+(this.state.user.lastname)}</a></p></text>
+      )
+    }
+  }
+
+  class Avatar extends Component {
+    constructor(props){
+      super(props)
+      this.state = {
+        user: '',
+      }
+    }
+    componentDidMount() {
+      if (localStorage.getItem('token') !== null) {
+       const token = jwt.verify(tokenraw, 'pssst!')
+       axios.get('https://dumb-tick-express.herokuapp.com/api/v1/user/'+token.userId)
+      .then(res=>{
+        this.setState({user: res.data.firstname})
+        console.log(res)
+      })
+      }
+    }
+    render() {
+      return(
+        <text>{this.state.user.substring(0,1)}</text>
       )
     }
   }

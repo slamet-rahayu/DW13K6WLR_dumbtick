@@ -44,8 +44,8 @@ class Content extends Component {
     })
     }
     render(){
-        // const {user} = this.props.user
-        // const {events} = this.props.events
+        const {user} = this.props.user
+        const {events} = this.props.events
         const event = this.state.data
         const upcoming = event.filter(event=>{
         const date = new Date(event.startTime)
@@ -54,11 +54,11 @@ class Content extends Component {
         return(date.toISOString().substring(0,10) == tomorrow.toISOString().substring(0,10))
         })
         const datas = event.filter((data)=>{return data.title.toLowerCase().indexOf(this.props.filter.toLowerCase()) !== -1})
-        const userid = this.state.user.id
+        const userid = user.id
         return(
         <text>
         <div className="album">
-        <Row>{datas.map((s,k)=>{
+        <Row>{events.map((s,k)=>{
             return(
                 <Col sm={4} className="mb-4">
                 <Card>
@@ -73,16 +73,24 @@ class Content extends Component {
                     src={s.img} />
                     </a>
                     <Card.Body>
+                    {(localStorage.getItem('token') !== null) ? 
                     <button style={{float:"right", background:"none", border:"none"}}
                     onClick={()=>
                     (this.state.favs.find(e=>e['event_id'] === s.id)) ? 
-                    axios.delete('https://dumb-tick-express.herokuapp.com/api/v1/deletefav/')
+                    axios.post('https://dumb-tick-express.herokuapp.com/api/v1/deletefav/', {
+                        user_id: userid,
+                        event_id: s.id
+                    })
                      : axios.post('https://dumb-tick-express.herokuapp.com/api/v1/addfav',{
                         user_id: userid,
                         event_id: s.id
                         })}>
                     {this.state.favs.find(e=>e['event_id'] === s.id) ? <i style={{fontSize:"20px",color:"red"}} class="fa fa-heart"></i> : <i style={{fontSize:"20px",color:"black"}} class="fa fa-heart"></i>}
                     </button>
+                    :
+
+                    ''
+                    }
                     <a href={'/eventdetail?id='+(s.id)}>
                     <Card.Title>{s.title.substring(0,30)}</Card.Title>
                     </a>
@@ -115,13 +123,13 @@ class Content extends Component {
 //     }
 // }
 
-// const mapstateToProps = state => {
-//     return{
-//         user: state.user,
-//         events: state.events
-//     }
-// }
+const mapstateToProps = state => {
+    return{
+        user: state.user,
+        events: state.events
+    }
+}
 
-// export default connect(mapstateToProps, mapDispatchToProps)(Content);
+export default connect(mapstateToProps)(Content);
 
-export default Content
+// export default Content

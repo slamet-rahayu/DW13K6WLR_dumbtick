@@ -9,6 +9,9 @@ import Upcoming from '../components/Upcoming'
 import Category from '../components/Category'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { connect } from 'react-redux'
+import { bindActionCreators } from "redux"
+import { getEvents } from '../_actions/eventsaction'
 
 class Home extends Component{
     constructor(props){
@@ -17,10 +20,26 @@ class Home extends Component{
             filter: ''
         }
     }
+    componentDidMount(){
+    this.props.getEvents()
+    }
     formHandler = e =>{
         this.setState({[e.target.name]: e.target.value})
     }
     render() {
+    const {events} = this.props.events
+    const {isLoading} = this.props.events
+    if(isLoading){
+        return(
+            <Container>
+                <Row style={{marginLeft:"45%",marginTop:"30%"}}>
+                    <Col>
+                    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
 return (
 <text>
 <Header />
@@ -60,4 +79,18 @@ return (
     }
 }
 
-export default Home;
+function mapDispatchToProps(dispatch) {
+    return {
+        getEvents: bindActionCreators(getEvents, dispatch)
+    }
+}
+
+const mapstateToProps = state => {
+    return{
+        events: state.events
+    }
+}
+
+export default connect(mapstateToProps, mapDispatchToProps)(Home);
+
+// export default Home;

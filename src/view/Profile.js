@@ -8,6 +8,7 @@ import axios from 'axios'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Favourites from '../components/Favourites'
+import Moment from 'react-moment'
 const jwt = require('jsonwebtoken')
 
 const query = new URLSearchParams(window.location.search)
@@ -52,7 +53,11 @@ class Profile extends Component{
           <Row>
             <Col>
             <h3><b>{(this.state.user.firstname)+' '+(this.state.user.lastname)}</b></h3>
-            <p>{this.state.user.dateOfBirth}</p>
+            <p>
+            <Moment format="DD MMM YYYY">
+            {this.state.user.dateOfBirth}
+            </Moment>
+            </p>
             <p>{this.state.user.phone}</p>
             <p>{this.state.user.email}</p>
             </Col>

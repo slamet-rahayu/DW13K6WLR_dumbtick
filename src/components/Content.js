@@ -45,8 +45,8 @@ class Content extends Component {
     // this.props.getEvents()
     }
     render(){
-        // const {user} = this.props.user
-        // const {events} = this.props.events
+        const {user} = this.props.user
+        const {events} = this.props.events
         const event = this.state.data
         const today = event.filter(event=>{
         const date = new Date(event.startTime)
@@ -58,8 +58,8 @@ class Content extends Component {
         tomorrow.setDate(tomorrow.getDate() + 1)
         return(date.toISOString().substring(0,10) == tomorrow.toISOString().substring(0,10))
         })
-        const datas = event.filter((data)=>{return data.title.toLowerCase().indexOf(this.props.filter.toLowerCase()) !== -1})
-        const userid = this.state.user.id
+        const datas = events.filter((data)=>{return data.title.toLowerCase().indexOf(this.props.filter.toLowerCase()) !== -1})
+        const userid = user.id
         return(
         <text>
         <div className="album">
@@ -75,9 +75,13 @@ class Content extends Component {
                 </Button>
                     <a href={'/eventdetail?id='+(s.id)}>    
                     <Card.Img variant="top" 
-                    src={s.img} />
+                    src={s.img}
+                    style={{maxHeight:"200px"}}
+                     />
                     </a>
                     <Card.Body>
+                    {(localStorage.getItem('token') !== null) ? 
+                    <form>
                     <button style={{float:"right", background:"none", border:"none"}}
                     onClick={()=>
                     (this.state.favs.find(e=>e['event_id'] === s.id)) ? 
@@ -88,10 +92,15 @@ class Content extends Component {
                      : axios.post('https://dumb-tick-express.herokuapp.com/api/v1/addfav',{
                         user_id: userid,
                         event_id: s.id
-                        })
-                        }>
+                        })}>
                     {this.state.favs.find(e=>e['event_id'] === s.id) ? <i style={{fontSize:"20px",color:"red"}} class="fa fa-heart"></i> : <i style={{fontSize:"20px",color:"black"}} class="fa fa-heart"></i>}
                     </button>
+                    </form>
+                    :
+                    <button style={{float:"right", background:"none", border:"none"}}>
+                    <i style={{fontSize:"20px"}} class="fa fa-heart"></i>
+                    </button>
+                    }
                     <a href={'/eventdetail?id='+(s.id)}>
                     <Card.Title>{s.title.substring(0,30)}</Card.Title>
                     </a>
@@ -105,7 +114,7 @@ class Content extends Component {
                     </Card.Body>
                     <Card.Footer>
                     <small className="text-muted">
-                    {s.description.substring(0,150)} . . .    
+                    {s.description.substring(0,140)} . . .    
                     </small>
                     </Card.Footer>
                 </Card>
@@ -124,13 +133,13 @@ class Content extends Component {
 //     }
 // }
 
-// const mapstateToProps = state => {
-//     return{
-//         user: state.user,
-//         events: state.events
-//     }
-// }
+const mapstateToProps = state => {
+    return{
+        user: state.user,
+        events: state.events
+    }
+}
 
-// export default connect(mapstateToProps, mapDispatchToProps)(Content);
+export default connect(mapstateToProps)(Content);
 
-export default Content;
+// export default Content;
